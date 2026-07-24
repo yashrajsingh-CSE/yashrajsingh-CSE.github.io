@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yash Raj Singh — B.Tech CSE · AI/ML &amp; Full-Stack Builder</title>
+<meta name="description" content="Portfolio of Yash Raj Singh, B.Tech Computer Science Engineering student at Rungta International Skills University, building AI/ML and full-stack web platforms.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============ RESET ============ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+img{max-width:100%;display:block;}
+a{color:inherit;}
+button,input,textarea{font:inherit;color:inherit;}
+ul{list-style:none;}
+
+/* ============ TOKENS ============ */
+:root{
+  --bg:#0b2036;
+  --bg2:#0e2740;
+  --bg3:#0a1c30;
+  --line:rgba(146,196,235,0.18);
+  --line-strong:rgba(146,196,235,0.4);
+  --ink:#edf4fa;
+  --muted:#8fadc7;
+  --accent:#ff6a39;
+  --accent-ink:#0b2036;
+  --stamp:#ff6a39;
+  --focus:#ffd23f;
+}
+[data-theme="diazo"]{
+  --bg:#f4efe2;
+  --bg2:#ece4d0;
+  --bg3:#faf6ea;
+  --line:rgba(40,60,90,0.16);
+  --line-strong:rgba(40,60,90,0.38);
+  --ink:#1c2b3a;
+  --muted:#5c6d80;
+  --accent:#c94a24;
+  --accent-ink:#faf6ea;
+  --stamp:#c94a24;
+  --focus:#c94a24;
+}
+
+/* ============ BASE ============ */
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'IBM Plex Sans',sans-serif;
+  font-weight:300;
+  line-height:1.6;
+  min-height:100vh;
+  overflow-x:hidden;
+  transition:background .35s ease,color .35s ease;
+}
+body::before{
+  content:'';
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:42px 42px;
+  opacity:.5;
+}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px;}
+h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-0.01em;}
+.mono{font-family:'IBM Plex Mono',monospace;}
+
+/* ============ LAYOUT SHELL ============ */
+.wrap{max-width:1180px;margin:0 auto;padding:0 2.5rem;}
+.sheet{position:relative;z-index:1;padding:6rem 0;border-top:1px solid var(--line);}
+.sheet:first-of-type{border-top:none;}
+.reg-mark{position:absolute;width:13px;height:13px;pointer-events:none;}
+.reg-mark::before{content:'';position:absolute;top:50%;left:0;width:100%;height:1px;background:var(--line-strong);transform:translateY(-50%);}
+.reg-mark::after{content:'';position:absolute;left:50%;top:0;height:100%;width:1px;background:var(--line-strong);transform:translateX(-50%);}
+.reg-mark.tl{top:8px;left:8px;} .reg-mark.tr{top:8px;right:8px;}
+.reg-mark.bl{bottom:8px;left:8px;} .reg-mark.br{bottom:8px;right:8px;}
+
+.sheet-head{display:flex;align-items:baseline;gap:1rem;margin-bottom:2.75rem;}
+.sheet-head .tag{
+  font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.14em;
+  color:var(--accent);white-space:nowrap;padding-bottom:.3rem;
+  border-bottom:1px solid var(--line-strong);
+}
+.sheet-head h2{font-size:clamp(1.6rem,3vw,2.3rem);}
+.sheet-head::after{content:'';flex:1;height:1px;background:var(--line);}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.in{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+
+/* ============ TITLE BLOCK / NAV ============ */
+header.title-block{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line-strong);
+}
+.tb-row{display:flex;align-items:center;justify-content:space-between;padding:.9rem 2.5rem;max-width:1180px;margin:0 auto;}
+.tb-mark{display:flex;align-items:center;gap:.7rem;text-decoration:none;}
+.tb-mark .box{
+  width:34px;height:34px;border:1px solid var(--line-strong);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.85rem;color:var(--accent);
+}
+.tb-mark .num{font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--muted);letter-spacing:.08em;}
+.tb-nav{display:flex;gap:2.1rem;}
+.tb-nav a{
+  font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;color:var(--muted);position:relative;padding-bottom:.2rem;transition:color .25s;
+}
+.tb-nav a::after{content:'';position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--accent);transition:width .25s;}
+.tb-nav a:hover,.tb-nav a.active{color:var(--ink);}
+.tb-nav a:hover::after,.tb-nav a.active::after{width:100%;}
+.tb-right{display:flex;align-items:center;gap:1.2rem;}
+.scale-note{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--muted);letter-spacing:.06em;}
+.theme-btn{
+  background:transparent;border:1px solid var(--line-strong);color:var(--ink);
+  padding:.4rem .8rem;font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.06em;
+  cursor:pointer;transition:all .25s;
+}
+.theme-btn:hover{border-color:var(--accent);color:var(--accent);}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;}
+.burger span{width:20px;height:1.5px;background:var(--ink);}
+
+/* ============ HERO ============ */
+#hero{padding-top:9.5rem;}
+.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:3.5rem;align-items:center;}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--accent);
+  letter-spacing:.14em;margin-bottom:1.6rem;
+}
+.eyebrow::before{content:'';width:22px;height:1px;background:var(--accent);}
+h1.name{font-size:clamp(2.6rem,6vw,4.6rem);line-height:1.02;margin-bottom:1.1rem;}
+h1.name span{display:block;}
+.role-line{
+  display:flex;align-items:center;gap:.6rem;font-family:'IBM Plex Mono',monospace;
+  font-size:1rem;color:var(--muted);margin-bottom:1.6rem;min-height:1.5em;
+}
+.role-line .arrow{color:var(--accent);}
+#typed-role{color:var(--ink);}
+.blink{display:inline-block;width:7px;height:1.05em;background:var(--accent);margin-left:2px;animation:blink 1s step-end infinite;vertical-align:-2px;}
+@keyframes blink{50%{opacity:0;}}
+.hero-desc{max-width:46ch;color:var(--muted);margin-bottom:2.2rem;font-weight:300;}
+.dim-strip{
+  display:flex;flex-wrap:wrap;gap:0;border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong);
+  margin-bottom:2.4rem;
+}
+.dim-strip div{
+  flex:1;min-width:110px;padding:.7rem 1rem;border-right:1px solid var(--line);
+}
+.dim-strip div:last-child{border-right:none;}
+.dim-strip .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.3rem;color:var(--accent);}
+.dim-strip .l{font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.85rem 1.6rem;font-family:'IBM Plex Mono',monospace;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;cursor:pointer;border:1px solid var(--line-strong);transition:all .25s;
+}
+.btn-fill{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:500;}
+.btn-fill:hover{filter:brightness(1.1);transform:translateY(-2px);}
+.btn-line{background:transparent;color:var(--ink);}
+.btn-line:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+
+.frame{position:relative;border:1px solid var(--line-strong);padding:.6rem;background:var(--bg2);}
+.frame img{width:100%;aspect-ratio:1/1;object-fit:cover;filter:grayscale(.15) contrast(1.03);}
+.frame .tab{position:absolute;width:9px;height:9px;border:1px solid var(--accent);}
+.frame .tab.tl{top:-5px;left:-5px;} .frame .tab.tr{top:-5px;right:-5px;}
+.frame .tab.bl{bottom:-5px;left:-5px;} .frame .tab.br{bottom:-5px;right:-5px;}
+.fig-cap{
+  display:flex;justify-content:space-between;margin-top:.7rem;
+  font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--muted);letter-spacing:.06em;
+}
+
+/* ============ ABOUT / GENERAL NOTES ============ */
+.about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:3.5rem;}
+.notes{counter-reset:note;}
+.notes li{
+  counter-increment:note;position:relative;padding-left:2.4rem;margin-bottom:1.35rem;color:var(--muted);font-weight:300;
+}
+.notes li::before{
+  content:counter(note);position:absolute;left:0;top:.05em;
+  width:1.5rem;height:1.5rem;border:1px solid var(--line-strong);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--accent);
+}
+.notes li span{color:var(--ink);}
+.spec-table{border:1px solid var(--line-strong);}
+.spec-table .row{display:flex;border-bottom:1px solid var(--line);}
+.spec-table .row:last-child{border-bottom:none;}
+.spec-table .k{
+  width:40%;padding:.75rem .9rem;font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.05em;
+  color:var(--muted);background:var(--bg2);text-transform:uppercase;border-right:1px solid var(--line);
+}
+.spec-table .v{padding:.75rem .9rem;font-size:.88rem;}
+
+/* ============ SKILLS / BOM ============ */
+.bom{width:100%;border-collapse:collapse;font-size:.88rem;}
+.bom thead th{
+  text-align:left;padding:.7rem .9rem;font-family:'IBM Plex Mono',monospace;font-size:.66rem;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line-strong);
+}
+.bom td{padding:.65rem .9rem;border-bottom:1px solid var(--line);}
+.bom tr.cat td{
+  background:var(--bg2);font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.1em;
+  color:var(--accent);text-transform:uppercase;padding-top:.9rem;
+}
+.bom .no{font-family:'IBM Plex Mono',monospace;color:var(--muted);width:3.5rem;}
+.dots{display:flex;gap:4px;}
+.dots span{width:7px;height:7px;border:1px solid var(--line-strong);border-radius:50%;}
+.dots span.on{background:var(--accent);border-color:var(--accent);}
+.bom-wrap{overflow-x:auto;border:1px solid var(--line-strong);}
+
+/* ============ PROJECTS ============ */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:1.3rem;}
+.proj-card{border:1px solid var(--line-strong);background:var(--bg2);padding:1.6rem;transition:border-color .25s, transform .25s;position:relative;}
+.proj-card:hover{border-color:var(--accent);transform:translateY(-4px);}
+.proj-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.9rem;}
+.proj-no{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--accent);letter-spacing:.06em;}
+.proj-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1.15rem;margin-bottom:.7rem;}
+.proj-desc{color:var(--muted);font-size:.87rem;font-weight:300;margin-bottom:1.1rem;line-height:1.65;}
+.proj-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.2rem;}
+.proj-tags span{
+  font-family:'IBM Plex Mono',monospace;font-size:.65rem;padding:.25rem .55rem;border:1px solid var(--line-strong);
+  color:var(--muted);letter-spacing:.03em;
+}
+.proj-link{
+  display:inline-flex;align-items:center;gap:.4rem;text-decoration:none;color:var(--ink);
+  font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.05em;border-bottom:1px solid var(--line-strong);
+  padding-bottom:.15rem;transition:color .25s,border-color .25s;
+}
+.proj-link:hover{color:var(--accent);border-color:var(--accent);}
+
+/* ============ CERTIFICATIONS ============ */
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.3rem;}
+.cert-card{
+  border:1px solid var(--line-strong);background:var(--bg2);cursor:pointer;overflow:hidden;
+  transition:border-color .25s, transform .25s;position:relative;
+}
+.cert-card:hover{border-color:var(--accent);transform:translateY(-4px);}
+.cert-thumb{width:100%;height:170px;object-fit:cover;border-bottom:1px solid var(--line-strong);filter:grayscale(.25) contrast(1.05);}
+.cert-body{padding:1.1rem 1.2rem 1.3rem;}
+.cert-issuer{font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.35rem;}
+.cert-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1rem;margin-bottom:.5rem;}
+.cert-date{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--accent);}
+.stamp{
+  position:absolute;top:.9rem;right:.9rem;border:1.5px solid var(--stamp);color:var(--stamp);
+  font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.1em;padding:.25rem .5rem;
+  transform:rotate(6deg);opacity:.85;
+}
+#cert-modal{
+  position:fixed;inset:0;z-index:200;background:rgba(6,14,24,.92);
+  display:none;align-items:center;justify-content:center;padding:3rem;cursor:zoom-out;
+}
+#cert-modal.open{display:flex;}
+#cert-modal img{max-width:90vw;max-height:85vh;border:1px solid var(--line-strong);}
+#modal-close{
+  position:absolute;top:1.5rem;right:1.5rem;background:transparent;border:1px solid var(--line-strong);
+  color:#fff;width:38px;height:38px;cursor:pointer;font-size:1rem;
+}
+
+/* ============ HISTORY / REVISIONS ============ */
+.rev-table{width:100%;border-collapse:collapse;font-size:.87rem;}
+.rev-table th{
+  text-align:left;padding:.7rem .9rem;font-family:'IBM Plex Mono',monospace;font-size:.66rem;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line-strong);
+}
+.rev-table td{padding:.85rem .9rem;border-bottom:1px solid var(--line);vertical-align:top;}
+.rev-table .rev{font-family:'IBM Plex Mono',monospace;color:var(--accent);width:3rem;}
+.rev-table .date{font-family:'IBM Plex Mono',monospace;color:var(--muted);white-space:nowrap;width:8rem;}
+.rev-table .by{color:var(--muted);font-size:.82rem;width:15rem;}
+.rev-wrap{overflow-x:auto;border:1px solid var(--line-strong);}
+
+/* ============ CONTACT ============ */
+.contact-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:3.5rem;}
+.issued-to{border:1px solid var(--line-strong);padding:1.6rem;background:var(--bg2);margin-bottom:1.8rem;}
+.issued-to .row{display:flex;gap:.8rem;align-items:flex-start;margin-bottom:1rem;font-size:.9rem;}
+.issued-to .row:last-child{margin-bottom:0;}
+.issued-to svg{flex-shrink:0;margin-top:.15rem;color:var(--accent);}
+.social-row{display:flex;gap:.8rem;flex-wrap:wrap;}
+.social-row a{
+  display:flex;align-items:center;gap:.5rem;padding:.6rem 1rem;border:1px solid var(--line-strong);
+  text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.04em;
+  transition:border-color .25s,color .25s;
+}
+.social-row a:hover{border-color:var(--accent);color:var(--accent);}
+.field{margin-bottom:1.3rem;}
+.field label{display:block;font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;}
+.field input,.field textarea{
+  width:100%;background:var(--bg2);border:1px solid var(--line-strong);color:var(--ink);
+  padding:.75rem .9rem;font-family:'IBM Plex Sans',sans-serif;font-size:.9rem;
+}
+.field textarea{min-height:120px;resize:vertical;}
+.field input:focus,.field textarea:focus{border-color:var(--accent);outline:none;}
+.form-note{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--muted);margin-top:.8rem;}
+
+/* ============ FOOTER ============ */
+footer{border-top:1px solid var(--line-strong);padding:1.8rem 0;position:relative;z-index:1;}
+.foot-row{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+  font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--muted);letter-spacing:.06em;
+}
+#top-btn{background:transparent;border:1px solid var(--line-strong);color:var(--muted);padding:.5rem .8rem;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:.68rem;transition:all .25s;}
+#top-btn:hover{border-color:var(--accent);color:var(--accent);}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:860px){
+  .tb-nav{position:fixed;top:64px;left:0;right:0;background:var(--bg);flex-direction:column;padding:1.5rem 2.5rem;border-bottom:1px solid var(--line-strong);gap:1.2rem;transform:translateY(-130%);transition:transform .3s;}
+  .tb-nav.open{transform:translateY(0);}
+  .burger{display:flex;}
+  .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr;}
+  .hero-grid .frame{max-width:280px;margin:0 auto;}
+  .wrap{padding:0 1.4rem;}
+  .sheet{padding:4rem 0;}
+}
+</style>
+</head>
+<body>
+
+<header class="title-block">
+  <div class="tb-row">
+    <a href="#hero" class="tb-mark">
+      <span class="box">YR</span>
+      <span class="num">DWG&nbsp;NO.&nbsp;YRS—2026<br>SHEET&nbsp;01&nbsp;OF&nbsp;07</span>
+    </a>
+    <ul class="tb-nav" id="tb-nav">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certifications">Certs</a></li>
+      <li><a href="#history">History</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="tb-right">
+      <span class="scale-note">SCALE 1:1</span>
+      <button class="theme-btn" id="theme-toggle">CYANOTYPE</button>
+      <button class="burger" id="burger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section id="hero" class="sheet">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow reveal">SUBJECT — 001 / STUDENT PROFILE</div>
+        <h1 class="name reveal"><span>Yash Raj</span><span>Singh</span></h1>
+        <div class="role-line reveal">
+          <span class="arrow">⟶</span>
+          <span id="typed-role">Full-Stack Developer</span><span class="blink"></span>
+        </div>
+        <p class="hero-desc reveal">AI/ML student at Rungta International Skills University with a parallel interest in full-stack development — I build small, purposeful platforms for real institutional problems: farming, classrooms, academic integrity, language access.</p>
+        <div class="dim-strip reveal">
+          <div><div class="n">07</div><div class="l">Certifications</div></div>
+          <div><div class="n">05</div><div class="l">Projects Built</div></div>
+          <div><div class="n">05</div><div class="l">Languages</div></div>
+          <div><div class="n">2029</div><div class="l">Grad. Year</div></div>
+        </div>
+        <div class="hero-btns reveal">
+          <a href="#projects" class="btn btn-fill">View Projects →</a>
+          <a href="resume.pdf" download="Yash_Raj_Singh_Resume.pdf" class="btn btn-line">Download Spec Sheet</a>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="frame">
+          <img src="Profile_Photo.jpeg" alt="Yash Raj Singh">
+          <span class="tab tl"></span><span class="tab tr"></span><span class="tab bl"></span><span class="tab br"></span>
+        </div>
+        <div class="fig-cap"><span>FIG. 01 — SUBJECT PORTRAIT</span><span>PATNA, BIHAR, IN</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / GENERAL NOTES -->
+<section id="about" class="sheet">
+  <div class="wrap">
+    <div class="sheet-head reveal"><span class="tag">SHEET 02 / 07</span><h2>General Notes</h2></div>
+    <div class="about-grid">
+      <ol class="notes reveal">
+        <li>Currently an <span>AI/ML student</span> with a strong interest in data-driven technologies and intelligent systems — focused on machine learning, data analysis, and building basic models.</li>
+        <li>Also builds in <span>web development</span> using HTML, CSS, and JavaScript, shipping small projects that solve real-world problems and strengthen practical understanding.</li>
+        <li>Actively explores new technologies, participates in <span>coding challenges</span>, and shows interest in hackathons and team-based projects.</li>
+        <li>Engages with community initiatives and national programs — including Ministry of Youth Affairs &amp; Sports quiz platforms — and competitive coding to broaden perspective and sharpen <span>problem-solving</span> skills.</li>
+      </ol>
+      <div class="spec-table reveal">
+        <div class="row"><div class="k">Institution</div><div class="v">Rungta International Skills University</div></div>
+        <div class="row"><div class="k">Program</div><div class="v">B.Tech — Computer Science Engineering</div></div>
+        <div class="row"><div class="k">Duration</div><div class="v">2025 – 2029</div></div>
+        <div class="row"><div class="k">Location</div><div class="v">Patna, Bihar, India</div></div>
+        <div class="row"><div class="k">Status</div><div class="v">Available for opportunities</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS / BOM -->
+<section id="skills" class="sheet">
+  <div class="wrap">
+    <div class="sheet-head reveal"><span class="tag">SHEET 03 / 07</span><h2>Bill of Materials</h2></div>
+    <div class="bom-wrap reveal">
+      <table class="bom">
+        <thead><tr><th>Item</th><th>Designation</th><th>Category</th><th>Proficiency</th></tr></thead>
+        <tbody>
+          <tr class="cat"><td colspan="4">Programming Languages</td></tr>
+          <tr><td class="no">01</td><td>Python</td><td>Language</td><td><div class="dots"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div></td></tr>
+          <tr><td class="no">02</td><td>C / C++</td><td>Language</td><td><div class="dots"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div></td></tr>
+          <tr><td class="no">03</td><td>Java</td><td>Language</td><td><div class="dots"><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span></span></div></td></tr>
+          <tr><td class="no">04</td><td>JavaScript</td><td>Language</td><td><div class="dots"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div></td></tr>
+          <tr class="cat"><td colspan="4">Web Development</td></tr>
+          <tr><td class="no">05</td><td>HTML5</td><td>Frontend</td><td><div class="dots"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span></div></td></tr>
+          <tr><td class="no">06</td><td>CSS3</td><td>Frontend</td><td><div class="dots"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div></td></tr>
+          <tr class="cat"><td colspan="4">Tools &amp; Platforms</td></tr>
+          <tr><td class="no">07</td><td>Git &amp; GitHub</td><td>Tooling</td><td><div class="dots"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div></td></tr>
+          <tr><td class="no">08</td><td>VS Code</td><td>Tooling</td><td><div class="dots"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div></td></tr>
+          <tr><td class="no">09</td><td>Linux</td><td>Tooling</td><td><div class="dots"><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span></span></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="sheet">
+  <div class="wrap">
+    <div class="sheet-head reveal"><span class="tag">SHEET 04 / 07</span><h2>Component Registry</h2></div>
+    <div class="proj-grid">
+      <div class="proj-card reveal">
+        <div class="proj-top"><span class="proj-no mono">PRJ—01</span></div>
+        <div class="proj-title">KrishiMitra-AI</div>
+        <p class="proj-desc">An AI-powered personal farming assistant for farmers in Kerala — personalized, real-time, localized agricultural guidance using AI, weather intelligence, computer vision, and voice interaction.</p>
+        <div class="proj-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Python</span></div>
+        <a href="https://github.com/yashrajsingh-CSE/KrishiMitra-AI.git" class="proj-link" target="_blank">→ SOURCE</a>
+      </div>
+      <div class="proj-card reveal">
+        <div class="proj-top"><span class="proj-no mono">PRJ—02</span></div>
+        <div class="proj-title">SmartClass-AI</div>
+        <p class="proj-desc">An AI-powered smart classroom and timetable management platform automating academic scheduling, room allocation, faculty management, and attendance for institutions.</p>
+        <div class="proj-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Python</span></div>
+        <a href="https://github.com/yashrajsingh-CSE/SmartClass-AI.git" class="proj-link" target="_blank">→ SOURCE</a>
+      </div>
+      <div class="proj-card reveal">
+        <div class="proj-top"><span class="proj-no mono">PRJ—03</span></div>
+        <div class="proj-title">Authenticity-Validator-for-Academia</div>
+        <p class="proj-desc">AVA is an AI-powered academic integrity and authenticity verification platform helping institutions, educators, and students maintain originality and transparency in academic work.</p>
+        <div class="proj-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+        <a href="https://github.com/yashrajsingh-CSE/Authenticity-Validator-for-Academia.git" class="proj-link" target="_blank">→ SOURCE</a>
+      </div>
+      <div class="proj-card reveal">
+        <div class="proj-top"><span class="proj-no mono">PRJ—04</span></div>
+        <div class="proj-title">LinguaBridge-AI</div>
+        <p class="proj-desc">A multilingual conversational platform eliminating communication barriers between users and digital systems, enabling real-time communication across 100+ languages.</p>
+        <div class="proj-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Python</span></div>
+        <a href="https://github.com/yashrajsingh-CSE/LinguaBridge-AI.git" class="proj-link" target="_blank">→ SOURCE</a>
+      </div>
+      <div class="proj-card reveal">
+        <div class="proj-top"><span class="proj-no mono">PRJ—05</span></div>
+        <div class="proj-title">EduERP-Nexus</div>
+        <p class="proj-desc">An ERP-based integrated student management system centralizing academic, administrative, financial, and communication workflows into one cloud-enabled ecosystem.</p>
+        <div class="proj-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Python</span></div>
+        <a href="https://github.com/yashrajsingh-CSE/EduERP-Nexus.git" class="proj-link" target="_blank">→ SOURCE</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications" class="sheet">
+  <div class="wrap">
+    <div class="sheet-head reveal"><span class="tag">SHEET 05 / 07</span><h2>Quality Certifications</h2></div>
+    <div class="cert-grid">
+      <div class="cert-card reveal" onclick="openModal('certificates/Calculus_for_Machine_Learning_and_Data_Science.png')">
+        <span class="stamp">CERTIFIED</span>
+        <img class="cert-thumb" src="certificates/Calculus_for_Machine_Learning_and_Data_Science.png" alt="Calculus for Machine Learning and Data Science Certificate" loading="lazy">
+        <div class="cert-body">
+          <div class="cert-issuer">DeepLearning.AI · Coursera</div>
+          <div class="cert-title">Calculus for Machine Learning and Data Science</div>
+          <div class="cert-date mono">5 MAY 2026</div>
+        </div>
+      </div>
+      <div class="cert-card reveal" onclick="openModal('certificates/Object_Oriented_Programming_in_Java.png')">
+        <span class="stamp">CERTIFIED</span>
+        <img class="cert-thumb" src="certificates/Object_Oriented_Programming_in_Java.png" alt="Object Oriented Programming in Java Certificate" loading="lazy">
+        <div class="cert-body">
+          <div class="cert-issuer">IBM · Coursera</div>
+          <div class="cert-title">Object Oriented Programming in Java</div>
+          <div class="cert-date mono">5 MAY 2026</div>
+        </div>
+      </div>
+      <div class="cert-card reveal" onclick="openModal('certificates/c___certifecate.jpg')">
+        <span class="stamp">CERTIFIED</span>
+        <img class="cert-thumb" src="certificates/c___certifecate.jpg" alt="C/C++ Certificate" loading="lazy">
+        <div class="cert-body">
+          <div class="cert-issuer">Coding Spoon</div>
+          <div class="cert-title">C/C++ Programming</div>
+          <div class="cert-date mono">27 JAN 2026</div>
+        </div>
+      </div>
+      <div class="cert-card reveal" onclick="openModal('certificates/Coursera_IBM_HTML__CSS__JavaScript_certificate_page-0001.jpg')">
+        <span class="stamp">CERTIFIED</span>
+        <img class="cert-thumb" src="certificates/Coursera_IBM_HTML__CSS__JavaScript_certificate_page-0001.jpg" alt="IBM HTML CSS JS Certificate" loading="lazy">
+        <div class="cert-body">
+          <div class="cert-issuer">IBM · Coursera</div>
+          <div class="cert-title">HTML, CSS &amp; JavaScript</div>
+          <div class="cert-date mono">22 DEC 2025</div>
+        </div>
+      </div>
+      <div class="cert-card reveal" onclick="openModal('certificates/coursera_C_certificate_page-0001.jpg')">
+        <span class="stamp">CERTIFIED</span>
+        <img class="cert-thumb" src="certificates/coursera_C_certificate_page-0001.jpg" alt="Coursera C Certificate" loading="lazy">
+        <div class="cert-body">
+          <div class="cert-issuer">University of Michigan · Coursera</div>
+          <div class="cert-title">Programming in C</div>
+          <div class="cert-date mono">27 DEC 2025</div>
+        </div>
+      </div>
+      <div class="cert-card reveal" onclick="openModal('certificates/Certificate1.png')">
+        <span class="stamp">VERIFIED</span>
+        <img class="cert-thumb" src="certificates/Certificate1.png" alt="VBYLD Certificate" loading="lazy">
+        <div class="cert-body">
+          <div class="cert-issuer">Ministry of Youth Affairs &amp; Sports</div>
+          <div class="cert-title">VBYLD 2026 — Online Quiz</div>
+          <div class="cert-date mono">20 SEP 2025</div>
+        </div>
+      </div>
+      <div class="cert-card reveal" onclick="openModal('certificates/Certificate2.png')">
+        <span class="stamp">VERIFIED</span>
+        <img class="cert-thumb" src="certificates/Certificate2.png" alt="Budget Quest Certificate" loading="lazy">
+        <div class="cert-body">
+          <div class="cert-issuer">MYBharat</div>
+          <div class="cert-title">MY Bharat Budget Quest 2026</div>
+          <div class="cert-date mono">12 FEB 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="cert-modal" onclick="closeModal()">
+  <button id="modal-close" onclick="closeModal(event)">✕</button>
+  <img id="modal-img" src="" alt="Certificate enlarged">
+</div>
+
+<!-- HISTORY / REVISIONS -->
+<section id="history" class="sheet">
+  <div class="wrap">
+    <div class="sheet-head reveal"><span class="tag">SHEET 06 / 07</span><h2>Revision History</h2></div>
+    <div class="rev-wrap reveal">
+      <table class="rev-table">
+        <thead><tr><th>Rev</th><th>Date</th><th>Description</th><th>Issued By</th></tr></thead>
+        <tbody>
+          <tr><td class="rev mono">A</td><td class="date mono">2026-05-05</td><td>Completed "Calculus for Machine Learning and Data Science," building core math foundations for ML</td><td class="by">DeepLearning.AI · Coursera</td></tr>
+          <tr><td class="rev mono">B</td><td class="date mono">2026-05-05</td><td>Completed "Object Oriented Programming in Java," strengthening OOP design fundamentals</td><td class="by">IBM · Coursera</td></tr>
+          <tr><td class="rev mono">C</td><td class="date mono">2026-02-12</td><td>Participated in the MY Bharat Budget Quest 2026 online quiz on the Union Budget</td><td class="by">MYBharat — Ministry of Youth Affairs &amp; Sports</td></tr>
+          <tr><td class="rev mono">D</td><td class="date mono">2026-01-27</td><td>Certified in C/C++ Programming, meeting Coding Spoon's competency framework</td><td class="by">Coding Spoon</td></tr>
+          <tr><td class="rev mono">E</td><td class="date mono">2025-12-27</td><td>Completed "Programming in C," strengthening low-level programming fundamentals</td><td class="by">University of Michigan · Coursera</td></tr>
+          <tr><td class="rev mono">F</td><td class="date mono">2025-12-22</td><td>Completed "Introduction to HTML, CSS &amp; JavaScript" web development fundamentals</td><td class="by">IBM · Coursera</td></tr>
+          <tr><td class="rev mono">G</td><td class="date mono">2025-09-20</td><td>Participated in the Viksit Bharat Young Leaders Dialogue (VBYLD) 2026 online quiz</td><td class="by">Ministry of Youth Affairs &amp; Sports</td></tr>
+          <tr><td class="rev mono">H</td><td class="date mono">2025 →</td><td>Began Bachelor of Technology in Computer Science Engineering</td><td class="by">Rungta International Skills University</td></tr>
+          <tr><td class="rev mono">G</td><td class="date mono">2012–2024</td><td>Completed Senior Secondary School Certificate</td><td class="by">St. Karen's High School</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="sheet">
+  <div class="wrap">
+    <div class="sheet-head reveal"><span class="tag">SHEET 07 / 07</span><h2>Contact Request</h2></div>
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="issued-to">
+          <div class="row">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <div>+91 93044 35446</div>
+          </div>
+          <div class="row">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <div>yashrajsinghharsh2005@gmail.com</div>
+          </div>
+          <div class="row">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div>H.No.-15 / Road No.1A, Shivpuri Atal Path, Patna, Bihar</div>
+          </div>
+        </div>
+        <div class="social-row">
+          <a href="https://www.linkedin.com/in/yash-raj-singh-harsh" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://github.com/yashrajsingh-CSE" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+      <form class="reveal" id="contact-form">
+        <div class="field">
+          <label for="f-name">Name</label>
+          <input type="text" id="f-name" placeholder="Your name" required>
+        </div>
+        <div class="field">
+          <label for="f-email">Email</label>
+          <input type="email" id="f-email" placeholder="your@email.com" required>
+        </div>
+        <div class="field">
+          <label for="f-msg">Message</label>
+          <textarea id="f-msg" placeholder="Project idea, opportunity, or question..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-fill">Send Message →</button>
+        <p class="form-note">Opens your email client with this message addressed to Yash.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <span>DRAWN — YASH RAJ SINGH &nbsp;·&nbsp; SHEET 1 OF 1 &nbsp;·&nbsp; REV 2026.07</span>
+    <span>© 2026 ALL RIGHTS RESERVED</span>
+    <button id="top-btn">↑ TOP</button>
+  </div>
+</footer>
+
+<script>
+// theme toggle
+const themeBtn = document.getElementById('theme-toggle');
+const stored = localStorage.getItem('yrs-theme');
+if (stored === 'diazo') { document.documentElement.setAttribute('data-theme','diazo'); themeBtn.textContent = 'DIAZO'; }
+themeBtn.addEventListener('click', () => {
+  const isDiazo = document.documentElement.getAttribute('data-theme') === 'diazo';
+  if (isDiazo) { document.documentElement.removeAttribute('data-theme'); themeBtn.textContent = 'CYANOTYPE'; localStorage.setItem('yrs-theme','cyanotype'); }
+  else { document.documentElement.setAttribute('data-theme','diazo'); themeBtn.textContent = 'DIAZO'; localStorage.setItem('yrs-theme','diazo'); }
+});
+
+// mobile nav
+const burger = document.getElementById('burger');
+const tbNav = document.getElementById('tb-nav');
+burger.addEventListener('click', () => tbNav.classList.toggle('open'));
+tbNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => tbNav.classList.remove('open')));
+
+// scroll spy
+const navLinks = document.querySelectorAll('.tb-nav a');
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (scrollY >= s.offsetTop - 140) current = s.id; });
+  navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+});
+
+// registration marks
+document.querySelectorAll('.sheet').forEach(s => {
+  s.style.position = 'relative';
+  ['tl','tr','bl','br'].forEach(c => {
+    const m = document.createElement('span');
+    m.className = 'reg-mark ' + c;
+    s.appendChild(m);
+  });
+});
+
+// reveal on scroll
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (!prefersReduced) {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+} else {
+  document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+}
+
+// typing effect
+const roles = ['Full-Stack Developer','AI/ML Enthusiast','Cloud Computing Learner','Problem Solver','Open-Source Contributor'];
+const typedEl = document.getElementById('typed-role');
+if (!prefersReduced) {
+  let ri = 0, ci = roles[0].length, deleting = true;
+  function loop() {
+    const word = roles[ri];
+    if (deleting) {
+      ci--; typedEl.textContent = word.slice(0, ci);
+      if (ci === 0) { deleting = false; ri = (ri + 1) % roles.length; setTimeout(loop, 300); return; }
+      setTimeout(loop, 40);
+    } else {
+      ci++; typedEl.textContent = word.slice(0, ci);
+      if (ci === word.length) { deleting = true; setTimeout(loop, 1700); return; }
+      setTimeout(loop, 85);
+    }
+  }
+  setTimeout(loop, 1400);
+}
+
+// certificate modal
+function openModal(src) {
+  document.getElementById('modal-img').src = src;
+  document.getElementById('cert-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(e) {
+  if (e) e.stopPropagation();
+  document.getElementById('cert-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('modal-img').addEventListener('click', e => e.stopPropagation());
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// contact form -> mailto
+document.getElementById('contact-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const name = document.getElementById('f-name').value;
+  const email = document.getElementById('f-email').value;
+  const msg = document.getElementById('f-msg').value;
+  const subject = encodeURIComponent('Portfolio contact from ' + name);
+  const body = encodeURIComponent(msg + '\n\n— ' + name + ' (' + email + ')');
+  window.location.href = `mailto:yashrajsinghharsh2005@gmail.com?subject=${subject}&body=${body}`;
+});
+
+// back to top
+document.getElementById('top-btn').addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+</script>
+</body>
+</html>
